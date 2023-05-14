@@ -7,8 +7,8 @@ from torch.nn import CrossEntropyLoss, Sigmoid
 from transformers import T5ForConditionalGeneration, T5Config
 from transformers.modeling_outputs import BaseModelOutput
 
-from nfsummary.models.model_output import NFSeq2SeqLMOutput
-from nfsummary.models.nflatent import NFLatentModel
+from flowsum.models.model_output import NFSeq2SeqLMOutput
+from flowsum.models.nflatent import NFLatentModel
 
 
 # Warning message for FutureWarning: head_mask was separated into two input args - head_mask, decoder_head_mask

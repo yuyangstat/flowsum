@@ -17,7 +17,7 @@ from flowsum.models.nft5 import NFT5
 from flowsum.models.nfgpt2 import NFGPT2
 from flowsum.trainers.trainer_bows_seq2seq import BOWsSeq2SeqTrainer
 from flowsum.trainers.trainer_time import TimeSeq2SeqTrainer
-from flowsum.trainers.trainer_lag import LagBOWsSeq2SeqTrainer
+from flowsum.trainers.trainer_caat import CAATBOWsSeq2SeqTrainer
 
 
 # load rouge for validation
@@ -195,8 +195,7 @@ SUPPORTED_TRAINERS = [
     "seq2seq",
     "time_seq2seq",
     "bows_seq2seq",
-    "lag_bows_seq2seq",
-    "lag_bows_seq2seq_v2",
+    "caat_bows_seq2seq",
 ]
 
 
@@ -207,12 +206,12 @@ def get_trainer_cls(trainer_name: str):
     ), f"We currently only support {SUPPORTED_TRAINERS}."
     if trainer_name == "seq2seq":
         return Seq2SeqTrainer
-    elif trainer_name == "bows_seq2seq":
-        return BOWsSeq2SeqTrainer
-    elif trainer_name == "lag_bows_seq2seq":
-        return LagBOWsSeq2SeqTrainer
     elif trainer_name == "time_seq2seq":
         return TimeSeq2SeqTrainer
+    elif trainer_name == "bows_seq2seq":
+        return BOWsSeq2SeqTrainer
+    elif trainer_name == "caat_bows_seq2seq":
+        return CAATBOWsSeq2SeqTrainer
 
 
 @dataclass
@@ -527,7 +526,7 @@ class MiscArguments:
         metadata={
             "help": (
                 "The trainer's name."
-                "Should be one of ['seq2seq', 'bows_seq2seq', 'lag_bows_seq2seq']."
+                "Should be one of ['seq2seq', 'bows_seq2seq', 'caat_bows_seq2seq']."
             )
         },
     )
@@ -560,7 +559,7 @@ class MiscArguments:
 
 @dataclass
 class CustomSeq2SeqTrainingArguments(Seq2SeqTrainingArguments):
-    """Training arguments used for lag training and visualization.
+    """Training arguments used for CAAT training and visualization.
 
     This way of writing depends on that the origianl TrainingArguments has all its field with default values,
         since we cannot have default arguments following non-default arguments.

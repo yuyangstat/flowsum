@@ -86,44 +86,6 @@ class NormalizingFlowModel(nn.Module):
         return z, log_q, log_prior
 
 
-class LegacyNormalizingFlowModel(nn.Module):
-    """Legacy Normalizing Flow Model. Built on top of self-written normalizing flows."""
-
-    def __init__(self, flows=None):
-        """Constructor of normalizing flow model
-        Args:
-          prior: standard Gaussian
-          flows: Flows to transform output of base encoder
-          q0: Base Encoder
-        """
-        super().__init__()
-        self.flows = nn.ModuleList(flows)
-
-    def forward(self, mu, log_sigma):
-        """Takes data batch, samples num_samples for each data point from base distribution
-        Args:
-            mu: (batch_size, nf_latent_size)
-            log_sigma: (batch_size, nf_latent_size)
-
-        Returns:
-          z: z_K
-          log_q: log q_K(z_K)
-          log_prior: log p(z_K|x)
-
-        Notes:
-            The case where flows = [] corresponds to the traditional variational inference where
-                the latent distribution is characterized by diagonal Gaussian.
-        """
-        z, log_q = DiagGaussian(mu=mu, log_sigma=log_sigma)
-        for flow in self.flows:
-            z, log_det = flow(z)
-            log_q -= log_det  # z: (batch_size, latent_size), log_q: (batch_size, )
-        log_prior = -0.5 * z.shape[-1] * np.log(2 * np.pi) - torch.sum(
-            0.5 * torch.pow(z, 2), dim=-1
-        )  # (batch_size, )
-        return z, log_q, log_prior
-
-
 def DiagGaussian(mu, log_sigma):
     assert mu.shape == log_sigma.shape  # (batch_size, nf_latent_size)
     eps = torch.randn(mu.shape, dtype=mu.dtype, device=mu.device)

@@ -61,7 +61,7 @@ SCHEDULER_NAME = "scheduler.pt"
 SCALER_NAME = "scaler.pt"
 
 
-class LagBOWsSeq2SeqTrainer(BOWsSeq2SeqTrainer):
+class CAATBOWsSeq2SeqTrainer(BOWsSeq2SeqTrainer):
     def _inner_training_loop(
         self,
         batch_size=None,

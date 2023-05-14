@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""TimeSeq2SeqTrainer class for evaluating generation time of Seq2Seq models from the hugging face model hub."""
+
 import time
 
 from typing import Any, Dict, List, Optional, Tuple, Union

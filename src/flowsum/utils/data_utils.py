@@ -205,9 +205,8 @@ SUMMARIZATION_NAME_MAPPING = {
     "wiki_summary": ("article", "highlights"),
     "multi_news": ("document", "summary"),
     "bart_cnndm": ("article", "highlights"),
-    "distill_cnndm": ("article", "highlights"),
-    "distill_xsum": ("document", "summary"),
-    "distil_multinews": ("document", "summary"),
+    "distil_cnndm": ("article", "highlights"),
+    "distil_xsum": ("document", "summary"),
     "newsroom": ("text", "summary"),
     "scientific_papers": ("article", "abstract"),
 }
@@ -240,10 +239,9 @@ def get_text_summary_column(data_args, column_names):
 
 
 DISTILLED_DATA_NAME_MAPPING = {
-    "cnn_dailymail": "distill_cnndm",  # the (relative/absolute) path to the data loading directory
-    "bart_cnndm": "distill_cnndm",
-    "xsum": "distill_xsum",
-    "multi_news": "distil_multinews",
+    "cnn_dailymail": "yuyang/distil_cnndm",  # the (relative/absolute) path to the data loading directory
+    "bart_cnndm": "yuyang/distil_cnndm",
+    "xsum": "yuyang/distil_xsum",
 }
 
 
@@ -255,8 +253,11 @@ def get_raw_datasets(data_args, model_args):
             the training data, since the validation and test of the
             distilled version are exactly the same as the original
             version.
-        (2) The current script requires the distilled data is built
-            with a dataset loading script. https://huggingface.co/docs/datasets/dataset_script
+        (2) The current script requires the distilled data to be loaded from
+            Hugging Face Hub, which contains the prefix "yuyang/". If users
+            load the distilled data from a local directory with the data
+            loading script, then DISTILLED_DATA_NAME_MAPPING needs to be
+            modified accordingly, namely, remove the prefix "yuyang/".
         (3) Updates on 03/14: switch the order of distilled and original data. The logic
             is to have the model learn more from the original data in the end. The
             empirical performance is not tested yet.
