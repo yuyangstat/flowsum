@@ -610,7 +610,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--config_file_path",
         type=str,
-        default="../experiments/debug/debug_multinews.yml",
+        default="./experiments/train/example.yml",
         help="The configuration file, including model_args, data_args, and training_args.",
     )
     cmd_args = parser.parse_args()

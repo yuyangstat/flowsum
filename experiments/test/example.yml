@@ -1,0 +1,59 @@
+model_args:
+  model_name_or_path: "nf-bart" # ["facebook/bart-large-cnn", "google/pegasus-cnn_dailymail", "t5-base"]
+  config_name: "facebook/bart-large-cnn"
+  tokenizer_name: "facebook/bart-large-cnn"
+  cache_dir: null # Where to store the pretrained models downloaded from huggingface.co
+  use_fast_tokenizer: True
+  model_revision: "main" # The specific model version to use (can be a branch name, tag name or commit id).
+  use_auth_token: False # can be deleted
+  resize_position_embeddings: null # Whether to automatically resize the position embeddings if `max_source_length` exceeds the model's position embeddings
+  nf_args:
+    q_input_type: "avg_embed"  # ["avg_embed", "bows"]
+    q_hidden_dims: [300, 300, 300]
+    q_act: "tanh"
+    q_dropout: 0.1
+    nf_name: "rqnsf" # rational-quadratic neural spline flows
+    nf_latent_size: 300
+    nf_num_layers: 4
+    nf_loss_weight: 1
+
+data_args:
+  dataset_name: "yuyang/bart_cnndm"
+  dataset_config_name: "3.0.0" # The configuration name of the dataset to use (via the datasets library).
+  text_column: null # The name of the column in the datasets containing the full texts (for summarization).
+  summary_column: null # The name of the column in the datasets containing the summaries (for summarization).
+  train_file: null # can be deleted
+  validation_file: null # can be deleted
+  test_file: null # can be deleted
+  overwrite_cache: False # Overwrite the cached training and evaluation sets
+  preprocessing_num_workers: null # The number of processes to use for the preprocessing.
+  max_source_length: 1024 # The maximum total input sequence length after tokenization. Sequences longer than this will be truncated, sequences shorter will be padded.
+  max_target_length: 128 # The maximum total sequence length for target text after tokenization. Sequences longer than this will be truncated, sequences shorter will be padded.
+  val_max_target_length: 142 # If null, then the default will be set as max_target_length. The maximum total sequence length for validation target text after tokenization. Sequences longer than this will be truncated, sequences shorter will be padded. Will default to `max_target_length`. This argument is also used to override the ``max_length`` param of ``model.generate``, which is used during ``evaluate`` and ``predict``.
+  pad_to_max_length: False # Whether to pad all samples to model maximum sentence length. If False, will pad the samples dynamically when batching to the maximum length in the batch. More efficient on GPU but very bad for TPU.
+  max_train_samples: null # For debugging purposes or quicker training, truncate the number of training examples to this value if set.
+  max_eval_samples: null # For debugging purposes or quicker training, truncate the number of evaluation examples to this value if set.
+  max_predict_samples: null # For debugging purposes or quicker training, truncate the number of prediction examples to this value if set.
+  num_beams: null # Number of beams to use for evaluation. This argument will be passed to ``model.generate``, which is used during ``evaluate`` and ``predict``.
+  ignore_pad_token_for_loss: True # Whether to ignore the tokens corresponding to padded labels in the loss computation or not.
+  source_prefix: "" # A prefix to add before every source text (useful for T5 models).
+  forced_bos_token: null # The token to force as the first generated token after the decoder_start_token_id. Useful for multilingual models like mBART where the first generated token needs to be the target language token (Usually it is the target language token)
+  add_bows: True
+  augment_distilled: False
+
+training_args:
+  output_dir: "../checkpoints/example"
+  evaluation_strategy: "steps"
+  resume_from_checkpoint: "../checkpoints/example/checkpoint-104000" # the folder named 'checkpoint-[*\d]'
+  predict_with_generate: True
+  overwrite_output_dir: True
+  fp16: True
+  do_train: False
+  do_eval: False
+  do_predict: True
+  per_device_train_batch_size: 4
+  per_device_eval_batch_size: 4
+
+
+miscellaneous_args:
+  trainer_name: "bows_seq2seq"  # should be one of ['seq2seq', 'bows_seq2seq', 'caat_bows_seq2seq']
