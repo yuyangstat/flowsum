@@ -3,11 +3,11 @@ from setuptools import setup, find_packages
 setup(
     name="flowsum",
     version="1.0",
-    packages=find_packages("src"),
-    package_dir={"": "src"},
+    packages=find_packages("."),
+    package_dir={"": "."},
     install_requires=[
         "torch",
-        "transformers >= 4.25.1",
+        "transformers == 4.25.1",
         "datasets == 2.9.0",
         "evaluate == 0.4.0",
         "tensorboardX == 2.5.1",
@@ -22,5 +22,6 @@ setup(
         "absl-py",
         "rouge_score",
         "accelerate",
+        "py7zr"
     ],
 )

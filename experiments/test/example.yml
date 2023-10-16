@@ -33,7 +33,7 @@ data_args:
   pad_to_max_length: False # Whether to pad all samples to model maximum sentence length. If False, will pad the samples dynamically when batching to the maximum length in the batch. More efficient on GPU but very bad for TPU.
   max_train_samples: null # For debugging purposes or quicker training, truncate the number of training examples to this value if set.
   max_eval_samples: null # For debugging purposes or quicker training, truncate the number of evaluation examples to this value if set.
-  max_predict_samples: null # For debugging purposes or quicker training, truncate the number of prediction examples to this value if set.
+  max_predict_samples: 16 # For debugging purposes or quicker training, truncate the number of prediction examples to this value if set.
   num_beams: null # Number of beams to use for evaluation. This argument will be passed to ``model.generate``, which is used during ``evaluate`` and ``predict``.
   ignore_pad_token_for_loss: True # Whether to ignore the tokens corresponding to padded labels in the loss computation or not.
   source_prefix: "" # A prefix to add before every source text (useful for T5 models).
@@ -42,9 +42,9 @@ data_args:
   augment_distilled: False
 
 training_args:
-  output_dir: "../checkpoints/example"
+  output_dir: "./checkpoints/example"
   evaluation_strategy: "steps"
-  resume_from_checkpoint: "../checkpoints/example/checkpoint-104000" # the folder named 'checkpoint-[*\d]'
+  resume_from_checkpoint: "./checkpoints/example/checkpoint-10" # the folder named 'checkpoint-[*\d]'
   predict_with_generate: True
   overwrite_output_dir: True
   fp16: True

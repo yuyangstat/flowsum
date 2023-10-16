@@ -241,6 +241,7 @@ def get_text_summary_column(data_args, column_names):
 DISTILLED_DATA_NAME_MAPPING = {
     "cnn_dailymail": "yuyang/distil_cnndm",  # the (relative/absolute) path to the data loading directory
     "bart_cnndm": "yuyang/distil_cnndm",
+    "yuyang/bart_cnndm": "yuyang/distil_cnndm",
     "xsum": "yuyang/distil_xsum",
 }
 

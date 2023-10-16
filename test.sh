@@ -1,4 +1,4 @@
-export EXPERIMENT_NAME=example_aug
+export EXPERIMENT_NAME=example
 mkdir -p ./checkpoints/$EXPERIMENT_NAME  # create saving directory if it doesn't exist: for saving log.
 python ./train.py \
     --gpu_ids 0 1\

@@ -604,7 +604,7 @@ if __name__ == "__main__":
         "--gpu_ids",
         nargs="+",
         type=int,
-        default=[5],
+        default=[5, 6],
         help="GPU ids. (ex. 3 4 5 6)",
     )
     parser.add_argument(
