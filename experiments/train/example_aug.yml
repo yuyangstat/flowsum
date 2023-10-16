@@ -31,7 +31,7 @@ data_args:
   max_target_length: 128 # The maximum total sequence length for target text after tokenization. Sequences longer than this will be truncated, sequences shorter will be padded.
   val_max_target_length: 142 # If null, then the default will be set as max_target_length. The maximum total sequence length for validation target text after tokenization. Sequences longer than this will be truncated, sequences shorter will be padded. Will default to `max_target_length`. This argument is also used to override the ``max_length`` param of ``model.generate``, which is used during ``evaluate`` and ``predict``.
   pad_to_max_length: False # Whether to pad all samples to model maximum sentence length. If False, will pad the samples dynamically when batching to the maximum length in the batch. More efficient on GPU but very bad for TPU.
-  max_train_samples: 32 # For debugging purposes or quicker training, truncate the number of training examples to this value if set.
+  max_train_samples: 16 # For debugging purposes or quicker training, truncate the number of training examples to this value if set.
   max_eval_samples: 16 # For debugging purposes or quicker training, truncate the number of evaluation examples to this value if set.
   max_predict_samples: 16 # For debugging purposes or quicker training, truncate the number of prediction examples to this value if set.
   num_beams: null # Number of beams to use for evaluation. This argument will be passed to ``model.generate``, which is used during ``evaluate`` and ``predict``.
@@ -52,19 +52,19 @@ training_args:
   do_train: True
   do_eval: True
   do_predict: True
-  per_device_train_batch_size: 4
-  per_device_eval_batch_size: 4
-  logging_steps: 2000
-  save_steps: 4000
-  eval_steps: 4000
-  warmup_steps: 2000
-  save_total_limit: 1
+  per_device_train_batch_size: 2
+  per_device_eval_batch_size: 2
+  logging_steps: 2
+  save_steps: 2
+  eval_steps: 2
+  warmup_steps: 2
+  save_total_limit: 2
   num_train_epochs: 3.0
   num_alternate_epochs: 1.0
   num_variational_iter_per_alter: 15
   visualize_latent_dist: True
   visualization_strategy: "steps"
-  visual_steps: 4000
+  visual_steps: 2
   num_visualize_samples_per_example: 300
   num_visualize_examples: 4
   load_best_model_at_end: True # used for early stopping

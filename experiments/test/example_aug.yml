@@ -45,7 +45,7 @@ data_args:
 training_args:
   output_dir: "./checkpoints/example_aug/"
   evaluation_strategy: "steps"
-  resume_from_checkpoint: "./checkpoints/example_aug/checkpoint-10" # the folder named 'checkpoint-[*\d]'
+  resume_from_checkpoint: "./checkpoints/example_aug/checkpoint-10/" # the folder named 'checkpoint-[*\d]'
   predict_with_generate: True
   overwrite_output_dir: True
   fp16: True

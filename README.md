@@ -2,7 +2,7 @@
 
 This repo contains the code for the EMNLP 2023 paper [Boosting Summarization with Normalizing Flows and Aggressive Training](https://openreview.net/forum?id=pGlnFVmI4x&referrer=%5BAuthor%20Console%5D(%2Fgroup%3Fid%3DEMNLP%2F2023%2FConference%2FAuthors%23your-submissions)). 
 
-## Installation
+## Setup
 ```bash
 # 1. create a virtual environment
 conda env create -f environment.yml
