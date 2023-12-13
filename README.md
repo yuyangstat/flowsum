@@ -1,6 +1,6 @@
 # FlowSUM
 
-This repo contains the code for the EMNLP 2023 paper [Boosting Summarization with Normalizing Flows and Aggressive Training](https://openreview.net/forum?id=pGlnFVmI4x&referrer=%5BAuthor%20Console%5D(%2Fgroup%3Fid%3DEMNLP%2F2023%2FConference%2FAuthors%23your-submissions)). 
+This repo contains the code for the EMNLP 2023 paper [Boosting Summarization with Normalizing Flows and Aggressive Training](https://aclanthology.org/2023.emnlp-main.165/). 
 
 ## Setup
 ```bash
@@ -21,4 +21,24 @@ We provide a few example train/test configuration files in the `experiments` fol
 bash train.sh
 
 bash test.sh
+```
+
+## Citation
+```bib
+@inproceedings{yang-shen-2023-boosting,
+    title = "Boosting Summarization with Normalizing Flows and Aggressive Training",
+    author = "Yang, Yu  and
+      Shen, Xiaotong",
+    editor = "Bouamor, Houda  and
+      Pino, Juan  and
+      Bali, Kalika",
+    booktitle = "Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing",
+    month = dec,
+    year = "2023",
+    address = "Singapore",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.emnlp-main.165",
+    pages = "2727--2751",
+    abstract = "This paper presents FlowSUM, a normalizing flows-based variational encoder-decoder framework for Transformer-based summarization. Our approach tackles two primary challenges in variational summarization: insufficient semantic information in latent representations and posterior collapse during training. To address these challenges, we employ normalizing flows to enable flexible latent posterior modeling, and we propose a controlled alternate aggressive training (CAAT) strategy with an improved gate mechanism. Experimental results show that FlowSUM significantly enhances the quality of generated summaries and unleashes the potential for knowledge distillation with minimal impact on inference time. Furthermore, we investigate the issue of posterior collapse in normalizing flows and analyze how the summary quality is affected by the training strategy, gate initialization, and the type and number of normalizing flows used, offering valuable insights for future research.",
+}
 ```
